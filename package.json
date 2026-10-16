@@ -1,0 +1,8 @@
+{
+  "name":"football-academy",
+  "private":true,
+  "version":"1.0.0",
+  "type":"module",
+  "description":"GitHub Pages-ready Football IQ Academy PWA",
+  "scripts":{"test":"node --test tests/*.test.mjs"}
+}

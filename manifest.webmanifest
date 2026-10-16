@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "Football Academy: Football IQ",
+  "short_name": "Football Academy",
+  "description": "Learn American football from the basics to advanced football IQ.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#10171b",
+  "theme_color": "#10171b",
+  "icons": [
+    {"src":"./assets/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./assets/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
