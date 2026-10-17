@@ -1,5 +1,5 @@
 /* Offline app-shell, versioned when releases are published. */
-const VERSION = 'football-academy-v1.0.0';
+const VERSION = 'football-academy-v1.1.0';
 const CORE = [
   './', './index.html', './manifest.webmanifest', './css/styles.css',
   './js/app.js', './js/curriculum.js', './js/positions.js', './js/labs.js',
