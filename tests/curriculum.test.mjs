@@ -5,7 +5,7 @@ import {positions,positionLessons,electiveLessons} from '../js/positions.js';
 import {playOptions,defenses,filmCases,situations} from '../js/labs.js';
 const all=[...coreLessons,...positionLessons,...electiveLessons];
 test('curriculum has all promised modules',()=>{
- assert.equal(coreLessons.length,10);
+ assert.equal(coreLessons.length,20);
  assert.equal(positions.length,10);
  assert.equal(positionLessons.length,30);
  assert.equal(electiveLessons.length,5);

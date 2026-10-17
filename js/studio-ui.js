@@ -107,5 +107,5 @@ export function studioChange(el,difficulty='rookie'){
  updateScreen();return true;
 }
 
-// Expose the animation timer cleanup to the main app during navigation.
+// Expose animation cleanup to main application.
 export {stop as stopStudio};
