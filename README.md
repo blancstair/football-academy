@@ -4,13 +4,14 @@
 
 ## What's included
 
-- **10 core levels**: six absolute-beginner foundations followed by four football-intelligence levels.
-- **30 position-specific lessons**: Quarterback, Running Back, Wide Receiver, Tight End, Offensive Line, Defensive Line & EDGE, Linebacker, Cornerback, Safety, and Special Teams. Every path has Rookie, Starter, and All-Pro tiers.
+- **20 sequential core levels**: six complete-beginner foundations, four football-intelligence foundations, and ten advanced college-style tactical levels (fronts, run families, passing structures, coverage rules, protections, quarterback reads, defensive checks, sequencing, spread/RPOs, full-play scouting).
+- **30 position-specific lessons** with expanded All-Pro specialist material: Quarterback, Running Back, Wide Receiver, Tight End, Offensive Line, Defensive Line & EDGE, Linebacker, Cornerback, Safety, and Special Teams. Every path has Rookie, Starter, and All-Pro tiers.
 - **5 strategy electives**: Playbook Architecture, Coverage Recognition, Clock & Fourth Down, Rules & Officiating, and Communication & Team IQ.
 - **Interactive Play Designer**: six offensive concepts, three defensive looks, four play phases, selectable player positions, and responsive SVG field diagrams.
 - **Film Room**: three animated-step case studies with questions.
-- **Situation Lab**: four strategic decision scenarios with immediate reasoning feedback.
-- **Coach Simulator**: a late-game offensive drive, clock, downs, yards, timeouts, field goal decisions, and evolving score. Simplified outcomes are illustrative, not actual game probabilities.
+- **Coach Simulator**: merges situational challenges into the live drive simulator, with clock, downs, yards, timeouts, field goal decisions, and evolving score. Simplified outcomes are illustrative, not actual game probabilities.
+- **Randomized knowledge checks**: a 9–14+ item bank per lesson; each attempt presents five random questions, with randomly rearranged options. College levels always include two random applied-read scenarios. Retries prefer questions not seen in the immediately preceding attempt. Four of five correct is required for a pass.
+- **Complete-play teaching sample**: Level 20 includes an eleven-player assignment breakdown, run/pass conflict read and defensive rotation analysis.
 - **Multiple local students**: user enters a name or nickname when first opening the app; each student has separate progress, quiz results, XP, and unlocks.
 - **Dark mode by default** with a light theme toggle.
 - **Offline PWA**: the service worker precaches all application resources after a successful first visit.
@@ -64,7 +65,13 @@ sw.js                      Offline cache/service worker
 .nojekyll                  Static GitHub Pages publishing
 css/styles.css             Responsive themes and layout
 js/app.js                  User interface, navigation, progress, quizzes, simulator
-js/curriculum.js           Ten core level definitions
+js/curriculum.js           Foundation and intermediate levels
+js/college.js              Ten sequential college-level tactical lessons
+js/position-advanced.js    Expanded position All-Pro concepts
+js/question-banks.js       Question bank sampler, shuffling, unseen-question preference
+js/advanced-checks.js      Advanced scenario-based knowledge checks
+js/play-structure.js       Complete eleven-player offensive call
+js/coaching.js             Concept-specific coaching explanations
 js/positions.js            Position tiers and electives
 js/labs.js                 SVG football field renderer and practice scenarios
 assets/                    PWA icons
@@ -73,7 +80,7 @@ package.json                Optional npm test command
 .github/workflows/pages.yml Automatic GitHub Pages deployment
 ```
 
-To add a new lesson, follow the data shape in `js/curriculum.js` or `js/positions.js`. Each lesson contains concepts and multiple-choice questions, with explanations and the index of the correct answer. Lessons pass at **80%** or higher. Previous tier or level completion controls unlocks. Keep lesson IDs stable after releasing the app so saved progress continues to work.
+To add a new lesson, follow the data shape in `js/curriculum.js` or `js/positions.js`. Each lesson contains concepts and multiple-choice questions, with explanations and the index of the correct answer. Each five-question checkpoint draws from a larger bank and passes at **80%** (four of five) or higher. Previous tier or level completion controls unlocks. Keep lesson IDs stable after releasing the app so saved progress continues to work.
 
 ## Notes on football rulebooks
 
@@ -87,6 +94,13 @@ Content is designed to explain common **11-player American football** concepts w
 - **Saved progress disappeared:** Local browser data may have been cleared. Restore an exported JSON backup from Settings.
 - **Name not shared between devices:** By design; importing a JSON backup is how progress is transferred without a server-side database.
 
+### Academic scope and limits
+- This is a football **mental learning course**, not a physical training program.
+- College-level lessons teach real schematic vocabulary and reading principles, but naming conventions and match rules vary between coaching staffs. Illustrative calls are explicitly labeled.
+- An educational play assignment is not a substitution for an actual college team's installation or NCAA rulebook.
+- Advanced level is defined by the ability to reason about a full play, not simply recalling terminology. The final lesson documents offensive assignments, defenders' responses and next-call adjustments.
+- This draft uses a deterministic question bank and local grading, not generative AI. Real footage, enhanced play animation, and play-specific player inspection are independent future work and are **not included**.
+
 ## Run curriculum validation
 
-If Node.js is installed, run `npm test` to validate the 45 lessons, quiz structure, and playable lab content. This does not require downloading packages.
+If Node.js is installed, run `npm test` to validate all 55 lessons, question banks, and playable lab content. This does not require downloading packages.

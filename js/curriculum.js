@@ -1,6 +1,7 @@
+import {collegiateLessons} from './college.js';
 // Football Academy core curriculum. Zero physical drills; entirely mental gameplay and decision-making.
 // Question tuple: [question, [answer choices], correct index, explanation].
-export const coreLessons = [
+const initialCoreLessons = [
   {
     id:'core-1',number:1,title:'The Game in One Drive',category:'The fundamentals',duration:9,
     summary:'Understand what each team is trying to accomplish, and how a football game actually flows.',
@@ -182,5 +183,7 @@ export const coreLessons = [
     ]
   }
 ];
-export const fundamentals = coreLessons.slice(0,6);
-export const advancedCore = coreLessons.slice(6);
+export const coreLessons=[...initialCoreLessons,...collegiateLessons];
+export const fundamentals=coreLessons.slice(0,6);
+export const advancedCore=coreLessons.slice(6,10);
+export const collegeCore=coreLessons.slice(10);

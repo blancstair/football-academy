@@ -8,3 +8,17 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 /* Keep primary-action text legible in the light theme. */
 body[data-theme="light"] .btn:not(.secondary):not(.ghost):not(.danger){color:#ffffff}
+
+/* The concept-specific coaching extension should read as part of the lesson, not a second quiz. */
+.concept-coaching{margin-top:15px;padding:17px 18px}
+.concept-coaching p{line-height:1.7}
+.lesson-sidebar .coach-note p{line-height:1.65}
+/* College tactical study: a full eleven-player call without horizontal page overflow. */
+.full-play-card{margin:20px 0;padding:16px;border:1px solid var(--line,rgba(140,170,170,.3));border-radius:14px;background:var(--surface,transparent)}
+.full-play-card h3{font-size:1.15rem;margin:8px 0}
+.full-play-card .role-table-wrap{overflow-x:auto;max-width:100%;border-radius:9px;border:1px solid var(--line,rgba(140,170,170,.25))}
+.full-play-card .role-table{border-collapse:collapse;width:100%;min-width:640px;font-size:.85rem}
+.full-play-card .role-table th,.full-play-card .role-table td{padding:9px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line,rgba(140,170,170,.2))}
+.full-play-card .role-table th{background:var(--panel,rgba(100,120,120,.12));font-weight:750;white-space:nowrap}
+.full-play-card .role-table td:first-child{font-weight:700;white-space:nowrap}
+@media(max-width:700px){.full-play-card{padding:11px}.full-play-card .grid.cols-2{grid-template-columns:1fr}}

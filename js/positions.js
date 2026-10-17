@@ -1,3 +1,4 @@
+import {specialistExtensions} from './position-advanced.js';
 // Independent Rookie, Starter, and All-Pro position lessons.
 const q=(prompt,options,correct,explanation)=>[prompt,options,correct,explanation];
 const tier=(title,summary,concepts,questions)=>({title,summary,concepts:concepts.map(([a,b])=>[a,b]),quiz:questions});
@@ -120,6 +121,14 @@ export const positionLessons=positions.flatMap(p=>p.tiers.map((t,index)=>({
   concepts:t.concepts.map(([head,body])=>[head,body,'Think about the assignment and how it affects teammates.']),
   quiz:t.quiz,positionId:p.id,tier:index+1,unit:p.unit
 })));
+for(const lesson of positionLessons){
+ if(lesson.tier!==3)continue;
+ const extra=specialistExtensions[lesson.positionId];
+ if(!extra)throw new Error(`No advanced specialist curriculum for ${lesson.positionId}`);
+ lesson.concepts.push(...extra.map(x=>x.slice(0,3)));
+ lesson.coaching=[...Array(3).fill(null),...extra.map(x=>x.slice(3))];
+ lesson.duration+=9;
+}
 export const electiveLessons=[
   {id:'elect-playbook',title:'Playbook Architecture',category:'Strategy Elective',duration:16,
    summary:'Discover why formations, route combinations, and complementary calls create a coherent offense.',

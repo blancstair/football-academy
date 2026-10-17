@@ -1,8 +1,8 @@
 /* Offline app-shell, versioned when releases are published. */
-const VERSION = 'football-academy-v1.1.0';
+const VERSION = 'football-academy-v1.2.0';
 const CORE = [
   './', './index.html', './manifest.webmanifest', './css/styles.css',
-  './js/app.js', './js/curriculum.js', './js/positions.js', './js/labs.js',
+  './js/app.js', './js/curriculum.js', './js/positions.js', './js/labs.js', './js/coaching.js', './js/question-banks.js', './js/college.js', './js/position-advanced.js', './js/play-structure.js', './js/advanced-checks.js',
   './assets/icon-192.png', './assets/icon-512.png'
 ];
 self.addEventListener('install', event => {
