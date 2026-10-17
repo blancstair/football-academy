@@ -1,5 +1,5 @@
 /* Offline app-shell, versioned when releases are published. */
-const VERSION = 'football-academy-v1.2.0-studio';
+const VERSION = 'football-academy-v1.2.0-studio-startup-fix1';
 const CORE = [
   './', './index.html', './manifest.webmanifest', './css/styles.css',
   './js/app.js', './js/curriculum.js', './js/positions.js', './js/labs.js', './js/coaching.js', './js/question-banks.js', './js/college.js', './js/position-advanced.js', './js/play-structure.js', './js/advanced-checks.js', './js/football-library.js', './js/studio-engine.js', './js/studio-ui.js', './js/position-pathways.js',

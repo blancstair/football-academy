@@ -106,3 +106,6 @@ export function studioChange(el,difficulty='rookie'){
  stop();if(screen==='sim'&&field==='scenario'){S.sim=newSim(el.value,difficulty,S.sim.side)}else {S[screen][field]=el.value;if(screen!=='sim'){S[screen].stage=0;S[screen].selected='QB'}else{S.sim.phase=0;S.sim.selected='QB';}}
  updateScreen();return true;
 }
+
+// Expose the animation timer cleanup to the main app during navigation.
+export {stop as stopStudio};
