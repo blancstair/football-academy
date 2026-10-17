@@ -1,4 +1,5 @@
 import {specialistExtensions} from './position-advanced.js';
+import {positionPathways} from './position-pathways.js';
 // Independent Rookie, Starter, and All-Pro position lessons.
 const q=(prompt,options,correct,explanation)=>[prompt,options,correct,explanation];
 const tier=(title,summary,concepts,questions)=>({title,summary,concepts:concepts.map(([a,b])=>[a,b]),quiz:questions});
@@ -128,6 +129,14 @@ for(const lesson of positionLessons){
  lesson.concepts.push(...extra.map(x=>x.slice(0,3)));
  lesson.coaching=[...Array(3).fill(null),...extra.map(x=>x.slice(3))];
  lesson.duration+=9;
+}
+// Position tiers deliberately teach different levels of recognition, analysis, and adjustment.
+for(const lesson of positionLessons){
+ const extras=positionPathways[lesson.positionId]?.[lesson.tier-1]||[];
+ if(!lesson.coaching)lesson.coaching=Array(lesson.concepts.length).fill(null);
+ for(const extra of extras){lesson.concepts.push(extra.concept);lesson.coaching.push(extra.coaching)}
+ lesson.goals.push(...(['Recognize pre-snap responsibilities','Explain intermediate reads and coordination','Solve defensive adjustments and match rules'].slice(lesson.tier-1,lesson.tier)));
+ lesson.duration+=extras.length*3;
 }
 export const electiveLessons=[
   {id:'elect-playbook',title:'Playbook Architecture',category:'Strategy Elective',duration:16,

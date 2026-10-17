@@ -5,11 +5,11 @@
 ## What's included
 
 - **20 sequential core levels**: six complete-beginner foundations, four football-intelligence foundations, and ten advanced college-style tactical levels (fronts, run families, passing structures, coverage rules, protections, quarterback reads, defensive checks, sequencing, spread/RPOs, full-play scouting).
-- **30 position-specific lessons** with expanded All-Pro specialist material: Quarterback, Running Back, Wide Receiver, Tight End, Offensive Line, Defensive Line & EDGE, Linebacker, Cornerback, Safety, and Special Teams. Every path has Rookie, Starter, and All-Pro tiers.
+- **30 position-specific lessons** with distinct Rookie, Starter, and All-Pro teaching progressions: Quarterback, Running Back, Wide Receiver, Tight End, Offensive Line, Defensive Line & EDGE, Linebacker, Cornerback, Safety, and Special Teams. Every path has Rookie, Starter, and All-Pro tiers.
 - **5 strategy electives**: Playbook Architecture, Coverage Recognition, Clock & Fourth Down, Rules & Officiating, and Communication & Team IQ.
-- **Interactive Play Designer**: six offensive concepts, three defensive looks, four play phases, selectable player positions, and responsive SVG field diagrams.
-- **Film Room**: three animated-step case studies with questions.
-- **Coach Simulator**: merges situational challenges into the live drive simulator, with clock, downs, yards, timeouts, field goal decisions, and evolving score. Simplified outcomes are illustrative, not actual game probabilities.
+- **Interactive Play Designer**: 38 offensive concepts, 23 defensive calls, 11 offensive formations, eight defensive fronts, and play-specific inspection of all 22 players, including assignments, reads, blocking/coverage, and reactions.
+- **Film Room**: five-stage visual play studies and coaching breakdowns for the same full concept library; use frame stepping and player inspection to learn how plays develop.
+- **Coach Simulator**: offensive and defensive play calling against the opponent's visible pre-snap formation, with scores, clock, downs, field position, and matchup-informed educational outcomes. The opponent's exact call is revealed after the play, not before.
 - **Randomized knowledge checks**: a 9–14+ item bank per lesson; each attempt presents five random questions, with randomly rearranged options. College levels always include two random applied-read scenarios. Retries prefer questions not seen in the immediately preceding attempt. Four of five correct is required for a pass.
 - **Complete-play teaching sample**: Level 20 includes an eleven-player assignment breakdown, run/pass conflict read and defensive rotation analysis.
 - **Multiple local students**: user enters a name or nickname when first opening the app; each student has separate progress, quiz results, XP, and unlocks.
@@ -73,7 +73,11 @@ js/advanced-checks.js      Advanced scenario-based knowledge checks
 js/play-structure.js       Complete eleven-player offensive call
 js/coaching.js             Concept-specific coaching explanations
 js/positions.js            Position tiers and electives
-js/labs.js                 SVG football field renderer and practice scenarios
+js/labs.js                 Legacy SVG football field helpers and scenarios
+js/football-library.js     Shared offensive and defensive concepts and formations
+js/studio-engine.js        Player assignments, reads, routes, matchup simulation
+js/studio-ui.js            Play Designer, Film Room, Coach Simulator views
+js/position-pathways.js    Differentiated specialist teaching by tier
 assets/                    PWA icons
 tests/                     No-dependency content validation tests
 package.json                Optional npm test command
@@ -99,8 +103,8 @@ Content is designed to explain common **11-player American football** concepts w
 - College-level lessons teach real schematic vocabulary and reading principles, but naming conventions and match rules vary between coaching staffs. Illustrative calls are explicitly labeled.
 - An educational play assignment is not a substitution for an actual college team's installation or NCAA rulebook.
 - Advanced level is defined by the ability to reason about a full play, not simply recalling terminology. The final lesson documents offensive assignments, defenders' responses and next-call adjustments.
-- This draft uses a deterministic question bank and local grading, not generative AI. Real footage, enhanced play animation, and play-specific player inspection are independent future work and are **not included**.
+- The release uses deterministic question banks and local grading, not generative AI. X/O animations and play-specific player inspections are included; actual licensed game footage is not included.
 
 ## Run curriculum validation
 
-If Node.js is installed, run `npm test` to validate all 55 lessons, question banks, and playable lab content. This does not require downloading packages.
+If Node.js is installed, run `npm test` to validate all 55 lessons, question banks, specialist pathways, and shared play studio content. This does not require downloading packages.
