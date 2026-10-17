@@ -11,10 +11,96 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="stylesheet" href="./css/styles.css">
   <title>Football Academy | The Football IQ Course</title>
+  <!-- Version each module URL so an old cache-first service worker cannot mix releases. -->
+  <script type="importmap">{"imports":{"./js/advanced-checks.js":"./js/advanced-checks.js?release=2026-10-17-boot-repair-1","./js/app.js":"./js/app.js?release=2026-10-17-boot-repair-1","./js/coaching.js":"./js/coaching.js?release=2026-10-17-boot-repair-1","./js/college.js":"./js/college.js?release=2026-10-17-boot-repair-1","./js/curriculum.js":"./js/curriculum.js?release=2026-10-17-boot-repair-1","./js/football-library.js":"./js/football-library.js?release=2026-10-17-boot-repair-1","./js/labs.js":"./js/labs.js?release=2026-10-17-boot-repair-1","./js/play-structure.js":"./js/play-structure.js?release=2026-10-17-boot-repair-1","./js/position-advanced.js":"./js/position-advanced.js?release=2026-10-17-boot-repair-1","./js/position-pathways.js":"./js/position-pathways.js?release=2026-10-17-boot-repair-1","./js/positions.js":"./js/positions.js?release=2026-10-17-boot-repair-1","./js/question-banks.js":"./js/question-banks.js?release=2026-10-17-boot-repair-1","./js/studio-engine.js":"./js/studio-engine.js?release=2026-10-17-boot-repair-1","./js/studio-ui.js":"./js/studio-ui.js?release=2026-10-17-boot-repair-1"}}</script>
 </head>
 <body data-theme="dark">
-  <div id="app"><div class="boot"><div class="boot-mark">FA</div><p>Preparing the playbook…</p></div></div>
+  <div id="app">
+    <main class="boot" id="boot-screen" aria-label="Loading Football Academy">
+      <div class="boot-mark">FA</div>
+      <h1 class="boot-heading">Preparing the playbook…</h1>
+      <p class="boot-description" id="boot-status" role="status" aria-live="polite">Starting Football Academy</p>
+      <div class="boot-progress" id="boot-track" role="progressbar" aria-label="Application loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="boot-progress-fill" id="boot-bar"></div>
+      </div>
+      <strong id="boot-percent" class="boot-percent">0%</strong>
+      <p class="boot-error" id="boot-error" role="alert" hidden></p>
+      <button class="boot-repair" id="boot-repair" type="button" hidden>Repair cached files and reload</button>
+    </main>
+  </div>
   <noscript>This app requires JavaScript to run the interactive football lessons.</noscript>
-  <script type="module" src="./js/app.js"></script>
+  <script>
+  /* This loader is inline on purpose: it can diagnose a module failure without needing the modules to load first. */
+  (() => {
+    'use strict';
+    const RELEASE="2026-10-17-boot-repair-1";
+    const ASSETS=["./js/advanced-checks.js?release=2026-10-17-boot-repair-1","./js/app.js?release=2026-10-17-boot-repair-1","./js/coaching.js?release=2026-10-17-boot-repair-1","./js/college.js?release=2026-10-17-boot-repair-1","./js/curriculum.js?release=2026-10-17-boot-repair-1","./js/football-library.js?release=2026-10-17-boot-repair-1","./js/labs.js?release=2026-10-17-boot-repair-1","./js/play-structure.js?release=2026-10-17-boot-repair-1","./js/position-advanced.js?release=2026-10-17-boot-repair-1","./js/position-pathways.js?release=2026-10-17-boot-repair-1","./js/positions.js?release=2026-10-17-boot-repair-1","./js/question-banks.js?release=2026-10-17-boot-repair-1","./js/studio-engine.js?release=2026-10-17-boot-repair-1","./js/studio-ui.js?release=2026-10-17-boot-repair-1"];
+    const $ = id => document.getElementById(id);
+    const progress = (value, label) => {
+      const pct = Math.max(0, Math.min(100, Math.round(value)));
+      if (!$('boot-screen')) return;
+      $('boot-track').setAttribute('aria-valuenow', String(pct));
+      $('boot-bar').style.width = pct + '%';
+      $('boot-percent').textContent = pct + '%';
+      $('boot-status').textContent = label;
+    };
+    const cacheKey = 'football-academy-repair-' + RELEASE;
+    const hasTriedRecovery = () => { try { return sessionStorage.getItem(cacheKey)==='1'; } catch { return false; } };
+    const markRecovery = () => { try { sessionStorage.setItem(cacheKey,'1'); } catch {} };
+    async function clearObsoleteCache() {
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.filter(r => r.scope.startsWith(new URL('./',location.href).href)).map(r=>r.unregister()));
+      }
+      if ('caches' in window) {
+        const keys=await caches.keys();
+        await Promise.all(keys.filter(k=>k.startsWith('football-academy-')).map(k=>caches.delete(k)));
+      }
+    }
+    function showError(error) {
+      if (!$('boot-screen')) return;
+      $('boot-status').textContent = 'Could not start Football Academy';
+      $('boot-error').hidden = false;
+      $('boot-error').textContent = 'The playbook could not load. ' + (error && error.message ? error.message : 'A required file is unavailable.') + ' Your student progress has not been deleted.';
+      $('boot-repair').hidden = false;
+    }
+    $('boot-repair').addEventListener('click',async () => {
+      $('boot-repair').disabled = true;
+      progress(0,'Repairing saved application files…');
+      try { await clearObsoleteCache(); markRecovery(); location.reload(); }
+      catch(error) { $('boot-repair').disabled=false; showError(error); }
+    });
+    async function run() {
+      progress(5, 'Checking the application files…');
+      // Register independently of app.js: module import errors must not block worker updates.
+      if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+        navigator.serviceWorker.register('./sw.js', {updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
+      }
+      let finished=0;
+      const loaded=await Promise.all(ASSETS.map(async url => {
+        const response=await fetch(url,{cache:'no-store'});
+        if (!response.ok) throw new Error('Could not retrieve ' + url.split('/').pop().split('?')[0] + ' (HTTP ' + response.status + ')');
+        await response.arrayBuffer(); // Count fully downloaded files, not elapsed seconds.
+        finished++;
+        progress(5 + 80*finished/ASSETS.length, 'Loading playbook files ('+finished+'/'+ASSETS.length+')…');
+        return true;
+      }));
+      progress(90,'Starting your academy…');
+      await import('./js/app.js?release='+RELEASE);
+      progress(100,'Ready');
+    }
+    run().catch(async error => {
+      // A previously installed cache-first worker can serve incompatible module versions.
+      // One automatic repair clears only app caches, never localStorage/student progress.
+      if (!hasTriedRecovery() && navigator.onLine !== false && 'serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        markRecovery();
+        progress(0,'Fixing outdated application files…');
+        try { await clearObsoleteCache(); location.reload(); return; } catch {}
+      }
+      showError(error);
+      console.error('Football Academy startup failed:',error);
+    });
+  })();
+  </script>
 </body>
 </html>
